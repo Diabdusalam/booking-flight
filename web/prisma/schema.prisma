@@ -31,25 +31,23 @@ enum StatusTransaction {
   failed
 }
 
-model Users {
-  id       Int       @id @default(autoincrement())
+model User {
+  id       String    @id @default(cuid())
   name     String
-  email    String
+  email    String    @unique
   password String
   passport String?
   role     RoleUser
-  ticket   Ticket[]
-  Session  Session[]
-
-  @@map("users")
+  tickets  Ticket[]
+  sessions Session[]
 }
 
 model Session {
   id        String   @id
-  userId    Int
+  userId    String
   expiresAt DateTime
 
-  user Users @relation(references: [id], fields: [userId], onDelete: Cascade)
+  user User @relation(references: [id], fields: [userId], onDelete: Cascade)
 }
 
 model Airplane {
@@ -90,8 +88,8 @@ model Ticket {
   code          Int               @unique
   flight        Flight            @relation(fields: [flightId], references: [id])
   flightId      Int
-  user          Users             @relation(fields: [usersId], references: [id])
-  usersId       Int
+  user          User              @relation(fields: [usersId], references: [id])
+  usersId       String
   Seat          FlightSeat        @relation(fields: [SeatId], references: [id])
   SeatId        Int               @unique
   bookingDate   DateTime

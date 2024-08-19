@@ -5,12 +5,12 @@ const prisma = new PrismaClient();
 
 async function main() {
   const password = bcrypt.hashSync("admin321", 10);
-  const userSeed = await prisma.users.create({
+  const userSeed = await prisma.user.create({
     data: {
       name: "Admin",
       email: "admin@example.com",
       role: "admin",
-      password: password,
+      password,
     },
   });
   console.log(userSeed);

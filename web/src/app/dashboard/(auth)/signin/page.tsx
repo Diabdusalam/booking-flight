@@ -1,13 +1,15 @@
+"use client";
+import React from "react";
 import { Metadata } from "next";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-import React from "react";
 import { ActionResult, handleSignIn } from "./action";
 import { useFormState } from "react-dom";
-export const metadata: Metadata = {
-  title: "Dashboard | Sign In",
-};
+
+// export const metadata: Metadata = {
+//   title: "Dashboard | Sign In",
+// };
 const initialFormState: ActionResult = {
   errorTitle: null,
   errorDesc: [],
